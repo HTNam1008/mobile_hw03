@@ -75,16 +75,16 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/birthday"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="10/08/2003"
 
             />
 
         <Button
-            android:layout_width="100dp"
+            android:id="@+id/btnSelectDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_toRightOf="@id/birthday"
             android:text="Select" />
 
@@ -109,11 +109,11 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Male"></RadioButton>
+                    android:text="Male"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Female"></RadioButton>
+                    android:text="Female"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -136,21 +136,21 @@
                     android:tag="hobbies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tennis"></CheckBox>
+                    android:text="Tennis"/>
                 <CheckBox
                     android:id="@+id/football"
                     android:tag="hobbies"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Football"></CheckBox>
+                    android:text="Football"/>
                 <CheckBox
                     android:id="@+id/others"
                     android:tag="hobbies"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Others"></CheckBox>
+                    android:text="Others"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -169,6 +169,7 @@
             android:id="@+id/btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:text="Sign up"
             />
 
