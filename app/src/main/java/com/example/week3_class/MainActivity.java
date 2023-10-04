@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int duration=Toast.LENGTH_SHORT;
     private Button btnReset ;
     private Button btnSignUp ;
+    private Button btnSelectDate;
 
     private EditText edtUsername;
     private EditText edtPassword;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnReset=findViewById(R.id.btnReset);
         btnSignUp=findViewById(R.id.btnSignUp);
+        btnSelectDate=findViewById(R.id.btnSelectDate);
 
         edtUsername=findViewById(R.id.username);
         edtPassword=findViewById(R.id.password);
@@ -53,9 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnReset.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
     }
-
-
-
 
     private boolean isRetypeCorrect() {
         boolean check=true;
@@ -105,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (v.getId() == btnSignUp.getId()) {
+            if (!validDate(edtBirthday.getText().toString())) {
+                Toast.makeText(context,"Ngày tháng không hợp lệ", duration).show();
+                return;
+            }
             if (isFullInfo()) {
                 if (isRetypeCorrect()) {
                     // Tạo một Bundle và đặt các giá trị vào đó
@@ -149,5 +153,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             hobbies=hobbies+", "+checkOthers.getText().toString();
         }
         return hobbies;
+    }
+    private static boolean validDate(String s) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            formatter.parse(s);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
