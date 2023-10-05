@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password: 123456789 "
+                android:text="Password: "
                 />
             <TextView
                 android:id="@+id/txtPassword"

@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v.getId() == btnSignUp.getId()) {
             if (!validDate(edtBirthday.getText().toString())) {
+                context=getApplicationContext();
                 Toast.makeText(context,"Ngày tháng không hợp lệ", duration).show();
                 return;
             }
@@ -143,13 +144,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bundle.putString("birthday", edtBirthday.getText().toString());
                     RadioButton gender = findViewById(rgGender.getCheckedRadioButtonId());
                     bundle.putString("gender", gender.getText().toString());
-
                     bundle.putString("hobbies", checkHobbies());
-
 // Tạo Intent để mở Activity B và đính kèm Bundle
                     Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                     intent.putExtras(bundle);
-
 // Khởi động Activity B
                     startActivity(intent);
                 }
