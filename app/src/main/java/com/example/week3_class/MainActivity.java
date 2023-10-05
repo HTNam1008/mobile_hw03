@@ -2,12 +2,16 @@ package com.example.week3_class;
 
 import android.app.Activity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,13 +19,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
     private int duration=Toast.LENGTH_SHORT;
     private Button btnReset ;
     private Button btnSignUp ;
+    private Button btnSelectDate;
 
     private EditText edtUsername;
     private EditText edtPassword;
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnReset=findViewById(R.id.btnReset);
         btnSignUp=findViewById(R.id.btnSignUp);
+        btnSelectDate=findViewById(R.id.btnSelectDate);
 
         edtUsername=findViewById(R.id.username);
         edtPassword=findViewById(R.id.password);
@@ -52,10 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnReset.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
+        btnSelectDate.setOnClickListener(this);
     }
-
-
-
 
     private boolean isRetypeCorrect() {
         boolean check=true;
@@ -88,6 +94,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == btnSelectDate.getId()) {
+            final Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH);
+            int year = calendar.get(Calendar.YEAR);
+            //
+            DatePickerDialog datePicker = new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                    calendar.set(i,i1,i2);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+                    edtBirthday.setText(dateFormat.format(calendar.getTime()));
+                }
+            },year,month,day);
+            datePicker.show();
+            return;
+        }
         if (v.getId() == btnReset.getId()) {
             edtUsername.setText("");
             edtPassword.setText("");
@@ -102,9 +125,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             checkOthers.setChecked(false);
             checkOthers.setSelected(false);
+
+            return;
         }
 
         if (v.getId() == btnSignUp.getId()) {
+            if (!validDate(edtBirthday.getText().toString())) {
+                Toast.makeText(context,"Ngày tháng không hợp lệ", duration).show();
+                return;
+            }
             if (isFullInfo()) {
                 if (isRetypeCorrect()) {
                     // Tạo một Bundle và đặt các giá trị vào đó
@@ -133,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 context=getApplicationContext();
                 Toast.makeText(context,"Hãy nhập đủ thông tin",duration).show();
             }
+            return;
         }
     }
 
@@ -149,5 +179,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             hobbies=hobbies+", "+checkOthers.getText().toString();
         }
         return hobbies;
+    }
+    private static boolean validDate(String s) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            formatter.parse(s);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
