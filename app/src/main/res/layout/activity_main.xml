@@ -78,7 +78,6 @@
             android:id="@+id/birthday"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-
             android:hint="dd/mm/yyyy"
             android:gravity="center"/>
         <Button
