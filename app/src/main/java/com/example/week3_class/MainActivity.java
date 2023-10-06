@@ -145,10 +145,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     RadioButton gender = findViewById(rgGender.getCheckedRadioButtonId());
                     bundle.putString("gender", gender.getText().toString());
                     bundle.putString("hobbies", checkHobbies());
-// Tạo Intent để mở Activity B và đính kèm Bundle
+                    // Tạo Intent để mở Activity B và đính kèm Bundle
                     Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                     intent.putExtras(bundle);
-// Khởi động Activity B
+                    // Khởi động Activity B
                     startActivity(intent);
                 }
                 else {
@@ -160,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 context=getApplicationContext();
                 Toast.makeText(context,"Hãy nhập đủ thông tin",duration).show();
             }
-            return;
         }
     }
 
@@ -175,6 +174,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (checkOthers.isChecked()) {
             hobbies=hobbies+", "+checkOthers.getText().toString();
+        }
+        if (hobbies.startsWith(",")) {
+            hobbies=hobbies.substring(2);
         }
         return hobbies;
     }
