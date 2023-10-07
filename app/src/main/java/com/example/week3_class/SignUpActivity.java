@@ -1,10 +1,7 @@
 package com.example.week3_class;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,21 +9,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import java.util.ConcurrentModificationException;
 
 public class SignUpActivity extends AppCompatActivity {
     private Context context;
     private int duration=Toast.LENGTH_SHORT;
-
     private Button btnExit;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singup);
+        setContentView(R.layout.resultform);
 
-        btnExit=findViewById(R.id.btnExit);
+        btnExit = findViewById(R.id.btnExit);
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,13 +47,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             txtUsername.setText("Username: " + username);
             txtPassword.setText(password);
-            txtBirthday.setText("Birthday: "+birthday);
-            txtGender.setText("Gender: "+gender);
-            txtHobbies.setText("Hobbies: "+hobbies);
+            txtBirthday.setText("Birthday: " + birthday);
+            txtGender.setText("Gender: " + gender);
+            txtHobbies.setText("Hobbies: " + hobbies);
 
         }
-
     }
-// th test
-
 }

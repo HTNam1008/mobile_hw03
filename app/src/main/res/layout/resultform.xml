@@ -26,21 +26,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password: "
-                android:layout_marginBottom="4dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password: "
+            android:layout_marginBottom="4dp"
 
-                />
-            <TextView
-                android:id="@+id/txtPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:layout_marginBottom="4dp"
+            />
+        <TextView
+            android:id="@+id/txtPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginBottom="4dp"
 
-                />
+            />
     </LinearLayout>
 
 

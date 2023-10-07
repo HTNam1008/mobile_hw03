@@ -90,69 +90,69 @@
     </RelativeLayout>
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt1"
-                android:text="Gender">
-            </TextView>
-            <RadioGroup
+            android:id="@+id/txt1"
+            android:text="Gender">
+        </TextView>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/gender">
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/gender">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"></RadioButton>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"></RadioButton>
-            </RadioGroup>
+                android:text="Male"></RadioButton>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"></RadioButton>
+        </RadioGroup>
 
-        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt2"
+            android:text="Hobbies">
+        </TextView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/tennis"
+                android:tag="hobbies"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txt2"
-                android:text="Hobbies">
-            </TextView>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:text="Tennis"></CheckBox>
+            <CheckBox
+                android:id="@+id/football"
+                android:tag="hobbies"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <CheckBox
-                    android:id="@+id/tennis"
-                    android:tag="hobbies"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tennis"></CheckBox>
-                <CheckBox
-                    android:id="@+id/football"
-                    android:tag="hobbies"
+                android:text="Football"></CheckBox>
+            <CheckBox
+                android:id="@+id/others"
+                android:tag="hobbies"
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Football"></CheckBox>
-                <CheckBox
-                    android:id="@+id/others"
-                    android:tag="hobbies"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Others"></CheckBox>
-            </LinearLayout>
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Others"></CheckBox>
         </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

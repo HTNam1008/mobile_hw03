@@ -1,13 +1,12 @@
 package com.example.week3_class;
 
-import android.app.Activity;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,13 +18,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Context context;
-    private int duration=Toast.LENGTH_SHORT;
+    private static Context context;
+    private static int duration=Toast.LENGTH_SHORT;
     private Button btnReset ;
     private Button btnSignUp ;
     private Button btnSelectDate;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.registerform);
 
 
         btnReset=findViewById(R.id.btnReset);
@@ -63,34 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSelectDate.setOnClickListener(this);
     }
 
-    private boolean isRetypeCorrect() {
-        boolean check=true;
-        if (!edtPassword.getText().toString().equals(edtRetype.getText().toString())) {
-            check=false;
-        }
-        return check;
-    }
 
-    private boolean isFullInfo() {
-        boolean check=true;
-        if (edtUsername.getText().toString().isEmpty()) {
-            check = false;
-        }
-        if (edtPassword.getText().toString().isEmpty()) {
-            check=false;
-        }
-        if (edtRetype.getText().toString().isEmpty()){
-            check=false;
-        }
-
-        if (rgGender.getCheckedRadioButtonId()==-1) {
-            check=false;
-        }
-        if (!checkFootball.isChecked() && !checkTennis.isChecked() &&!checkOthers.isChecked()){
-            check=false;
-        }
-        return check;
-    }
 
     @Override
     public void onClick(View v) {
@@ -132,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == btnSignUp.getId()) {
             if (!validDate(edtBirthday.getText().toString())) {
                 context=getApplicationContext();
-                Toast.makeText(context,"Ngày tháng không hợp lệ", duration).show();
+                Toast.makeText(context,"Ngày tháng không hợp lệ hoặc sai định dạng", duration).show();
                 return;
             }
             if (isFullInfo()) {
@@ -180,14 +156,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return hobbies;
     }
-    private static boolean validDate(String s) {
+    //Kiểm tra người dùng đã nhập ngày tháng đúng định dạng chưa
+    private boolean validDate(String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         try {
             formatter.parse(s);
         }
         catch (Exception e) {
             return false;
         }
-        return true;
+
+        String[] date=s.split("/");
+        int day=Integer.valueOf(date[0]);
+        int month=Integer.valueOf(date[1]);
+        int year=Integer.valueOf(date[2]);
+
+        if (month == 2) {
+            if (year % 4 == 0 && year%100!=0 ) {
+                // Năm nhuận, tháng 2 có 29 ngày
+                return day >= 1 && day <= 29;
+            } else {
+                // Năm không nhuận, tháng 2 có 28 ngày
+                return day >= 1 && day <= 28;
+            }
+        } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+            // Tháng 4, 6, 9, 11 có 30 ngày
+            return day >= 1 && day <= 30;
+        } else {
+            // Các tháng khác có 31 ngày
+            return day >= 1 && day <= 31;
+        }
+    }
+
+    // Kiểm tra nhập lại mật khẩu đã đúng chưa
+    private boolean isRetypeCorrect() {
+        boolean check=true;
+        if (!edtPassword.getText().toString().equals(edtRetype.getText().toString())) {
+            check=false;
+        }
+        return check;
+    }
+
+    // Kiểm tra đã nhập đầy đủ thông tin chưa
+    private boolean isFullInfo() {
+        boolean check=true;
+        if (edtUsername.getText().toString().isEmpty()) {
+            check = false;
+        }
+        if (edtPassword.getText().toString().isEmpty()) {
+            check=false;
+        }
+        if (edtRetype.getText().toString().isEmpty()){
+            check=false;
+        }
+
+        if (rgGender.getCheckedRadioButtonId()==-1) {
+            check=false;
+        }
+        if (!checkFootball.isChecked() && !checkTennis.isChecked() &&!checkOthers.isChecked()){
+            check=false;
+        }
+        return check;
     }
 }
